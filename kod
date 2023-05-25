@@ -1,0 +1,59 @@
+import React, { useState } from 'react';
+
+const App = () => {
+  const [airTemp, setAirTemp] = useState('');
+  const [waterInletTemp, setWaterInletTemp] = useState('');
+  const [airInletTemp, setAirInletTemp] = useState('');
+  const [averageTemp, setAverageTemp] = useState('');
+
+  const calculateAverageTemp = () => {
+    const airTempFloat = parseFloat(airTemp);
+    const waterInletTempFloat = parseFloat(waterInletTemp);
+    const airInletTempFloat = parseFloat(airInletTemp);
+
+    const average = (airTempFloat + waterInletTempFloat + airInletTempFloat) / 3;
+    setAverageTemp(average.toFixed(2));
+  };
+
+  return (
+    <div>
+      <h1>Średnia temperatura</h1>
+      <label>
+        Temperatura powietrza:
+        <input
+          type="text"
+          value={airTemp}
+          onChange={(e) => setAirTemp(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Temperatura wlotu wody:
+        <input
+          type="text"
+          value={waterInletTemp}
+          onChange={(e) => setWaterInletTemp(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Temperatura wlotu powietrza:
+        <input
+          type="text"
+          value={airInletTemp}
+          onChange={(e) => setAirInletTemp(e.target.value)}
+        />
+      </label>
+      <br />
+      <button onClick={calculateAverageTemp}>Oblicz średnią temperaturę</button>
+      <br />
+      <br />
+      <div>
+        <h2>Zakładka "results":</h2>
+        <p>Średnia temperatura: {averageTemp}</p>
+      </div>
+    </div>
+  );
+};
+
+export default App;
